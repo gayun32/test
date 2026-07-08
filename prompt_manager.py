@@ -146,6 +146,52 @@ def search_prompt(prompts):
         print(format_prompt_line(i, prompt))
     print(f"  {len(results)}개를 찾았어요.")
 
+def show_detail(prompts):
+    """프롬프트 번호를 입력하면 전체 내용을 출력한다."""
+    print("\n📖 프롬프트 자세히 보기")
+    print("-" * 30)
+    if not prompts:
+        print("  아직 등록된 프롬프트가 없어요.")
+        return
+
+    choice = input("번호 입력 >> ").strip()
+    if not choice.isdigit() or not (1 <= int(choice) <= len(prompts)):
+        print("  ↳ 올바른 번호가 아니에요.")
+        return
+
+    prompt = prompts[int(choice) - 1]
+    star = "⭐ 즐겨찾기 중" if prompt["favorite"] else "즐겨찾기 아님"
+
+    print("=" * 36)
+    print(f" 제목    : {prompt['title']}")
+    print(f" 카테고리: {prompt['category']}")
+    print(f" 상태    : {star}")
+    print("-" * 36)
+    print(" 내용")
+    print(f" {prompt['content']}")
+    print("=" * 36)
+
+def toggle_favorite(prompts):
+    """프롬프트 번호를 입력하여 즐겨찾기를 추가/해제한다."""
+    print("\n⭐ 즐겨찾기 켜고 끄기")
+    print("-" * 30)
+    if not prompts:
+        print("  아직 등록된 프롬프트가 없어요.")
+        return
+
+    choice = input("번호 입력 >> ").strip()
+    if not choice.isdigit() or not (1 <= int(choice) <= len(prompts)):
+        print("  ↳ 올바른 번호가 아니에요.")
+        return
+
+    prompt = prompts[int(choice) - 1]
+    prompt["favorite"] = not prompt["favorite"]
+
+    if prompt["favorite"]:
+        print(f"\n  ⭐ '{prompt['title']}'을(를) 즐겨찾기에 담았어요!")
+    else:
+        print(f"\n  '{prompt['title']}'을(를) 즐겨찾기에서 뺐어요.")
+
 def show_menu():
     """메인 메뉴를 출력하고 사용자의 선택을 반환한다."""
     print("\n💙🐬 나만의 프롬프트 보관함 🐬💙")
@@ -179,6 +225,10 @@ def main():
             show_category(prompts)
         elif choice == "4":
             search_prompt(prompts)
+        elif choice == "5":
+            show_detail(prompts)
+        elif choice == "6":
+            toggle_favorite(prompts)
         elif choice == "0":
             print("\n👋 프로그램을 종료합니다. 다음에 또 만나요!")
             break
