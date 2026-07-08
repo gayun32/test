@@ -100,6 +100,31 @@ def show_list(prompts):
     print("-" * 30)
     print(f"  총 {len(prompts)}개의 프롬프트가 있어요.")
 
+def show_category(prompts):
+    """카테고리를 선택하면 해당 카테고리의 프롬프트만 출력한다."""
+    print("\n🗂️  카테고리로 찾아보기")
+    print("-" * 30)
+    for i, category in enumerate(CATEGORIES, start=1):
+        print(f"  ({i}) {category}")
+
+    choice = input(">> ").strip()
+    if not choice.isdigit() or not (1 <= int(choice) <= len(CATEGORIES)):
+        print("  ↳ 올바른 번호가 아니에요.")
+        return
+
+    selected_category = CATEGORIES[int(choice) - 1]
+    filtered = [p for p in prompts if p["category"] == selected_category]
+
+    print(f"\n  '{selected_category}' 카테고리 결과")
+    print("-" * 30)
+    if not filtered:
+        print("  이 카테고리엔 아직 프롬프트가 없어요.")
+        return
+
+    for i, prompt in enumerate(filtered, start=1):
+        print(format_prompt_line(i, prompt))
+    print(f"  총 {len(filtered)}개를 찾았어요.")
+
 def show_menu():
     """메인 메뉴를 출력하고 사용자의 선택을 반환한다."""
     print("\n💙🐬 나만의 프롬프트 보관함 🐬💙")
@@ -129,6 +154,8 @@ def main():
             add_prompt(prompts)
         elif choice == "2":
             show_list(prompts)
+        elif choice == "3":
+            show_category(prompts)
         elif choice == "0":
             print("\n👋 프로그램을 종료합니다. 다음에 또 만나요!")
             break
