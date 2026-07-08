@@ -192,6 +192,20 @@ def toggle_favorite(prompts):
     else:
         print(f"\n  '{prompt['title']}'을(를) 즐겨찾기에서 뺐어요.")
 
+def show_favorites(prompts):
+    """즐겨찾기된 프롬프트만 모아서 보여준다."""
+    print("\n🌟 즐겨찾기 모아보기")
+    print("-" * 30)
+    favorites = [p for p in prompts if p["favorite"]]
+
+    if not favorites:
+        print("  아직 즐겨찾기한 프롬프트가 없어요.")
+        return
+
+    for i, prompt in enumerate(favorites, start=1):
+        print(format_prompt_line(i, prompt))
+    print(f"  총 {len(favorites)}개의 즐겨찾기가 있어요.")
+
 def show_menu():
     """메인 메뉴를 출력하고 사용자의 선택을 반환한다."""
     print("\n💙🐬 나만의 프롬프트 보관함 🐬💙")
@@ -229,6 +243,8 @@ def main():
             show_detail(prompts)
         elif choice == "6":
             toggle_favorite(prompts)
+        elif choice == "7":
+            show_favorites(prompts)
         elif choice == "0":
             print("\n👋 프로그램을 종료합니다. 다음에 또 만나요!")
             break
