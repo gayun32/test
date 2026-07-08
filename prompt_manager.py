@@ -86,7 +86,6 @@ def format_prompt_line(index, prompt):
     star = " ⭐" if prompt["favorite"] else ""
     return f"  {index:>2}. [{prompt['category']}] {prompt['title']}{star}"
 
-
 def show_list(prompts):
     """저장된 모든 프롬프트를 번호와 함께 출력한다."""
     print("\n📋 전체 프롬프트 목록")
@@ -125,6 +124,28 @@ def show_category(prompts):
         print(format_prompt_line(i, prompt))
     print(f"  총 {len(filtered)}개를 찾았어요.")
 
+def search_prompt(prompts):
+    """제목 또는 내용에 키워드가 포함된 프롬프트를 검색한다."""
+    print("\n🔍 키워드로 검색하기")
+    print("-" * 30)
+    keyword = input("검색어 입력 >> ").strip()
+
+    results = [
+        p
+        for p in prompts
+        if keyword.lower() in p["title"].lower() or keyword.lower() in p["content"].lower()
+    ]
+
+    print("\n  검색 결과")
+    print("-" * 30)
+    if not results:
+        print("  일치하는 프롬프트를 찾지 못했어요.")
+        return
+
+    for i, prompt in enumerate(results, start=1):
+        print(format_prompt_line(i, prompt))
+    print(f"  {len(results)}개를 찾았어요.")
+
 def show_menu():
     """메인 메뉴를 출력하고 사용자의 선택을 반환한다."""
     print("\n💙🐬 나만의 프롬프트 보관함 🐬💙")
@@ -156,6 +177,8 @@ def main():
             show_list(prompts)
         elif choice == "3":
             show_category(prompts)
+        elif choice == "4":
+            search_prompt(prompts)
         elif choice == "0":
             print("\n👋 프로그램을 종료합니다. 다음에 또 만나요!")
             break
