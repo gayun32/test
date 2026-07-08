@@ -1,3 +1,10 @@
+"""
+나만의 프롬프트 관리 프로그램
+"""
+
+CATEGORIES = ["텍스트 생성", "이미지 생성", "영상 생성", "페르소나", "자동화", "기타"]
+
+
 def get_default_prompts():
     """이전 미션에서 작성한 프롬프트를 기본 데이터로 등록한다."""
     return [
@@ -26,6 +33,55 @@ def get_default_prompts():
     ]
 
 
+def get_nonempty_input(label):
+    """빈 값이 입력되면 다시 입력을 요청한다."""
+    while True:
+        value = input(label).strip()
+        if value:
+            return value
+        print("  ↳ 입력값이 비어있어요. 다시 입력해주세요.\n")
+
+
+def choose_category():
+    """카테고리를 목록에서 선택하거나 직접 입력한다."""
+    print("\n▷ 카테고리를 골라주세요")
+    for i, category in enumerate(CATEGORIES, start=1):
+        print(f"   ({i}) {category}")
+    print("   (0) 직접 입력할래요")
+
+    choice = input(">> ").strip()
+
+    if choice.isdigit():
+        idx = int(choice)
+        if 1 <= idx <= len(CATEGORIES):
+            return CATEGORIES[idx - 1]
+        elif idx == 0:
+            return get_nonempty_input("카테고리 이름 입력 >> ")
+
+    if choice:
+        return choice
+    return get_nonempty_input("카테고리 이름 입력 >> ")
+
+
+def add_prompt(prompts):
+    """새로운 프롬프트를 등록한다."""
+    print("\n✏️  새 프롬프트 등록")
+    print("-" * 30)
+    title = get_nonempty_input("제목 >> ")
+    content = get_nonempty_input("내용 >> ")
+    category = choose_category()
+
+    prompts.append(
+        {
+            "title": title,
+            "content": content,
+            "category": category,
+            "favorite": False,
+        }
+    )
+    print("\n✅ 등록 완료! 새 프롬프트가 보관함에 저장되었어요.")
+
+
 def show_menu():
     """메인 메뉴를 출력하고 사용자의 선택을 반환한다."""
     print("\n💙🐬 나만의 프롬프트 보관함 🐬💙")
@@ -44,14 +100,16 @@ def show_menu():
 
 
 def main():
-    prompts = get_default_prompts()  # ← 기본 데이터 불러오기
+    prompts = get_default_prompts()
 
     print("\n환영합니다! 프롬프트 보관함을 시작할게요 :)")
 
     while True:
         choice = show_menu()
 
-        if choice == "0":
+        if choice == "1":
+            add_prompt(prompts)
+        elif choice == "0":
             print("\n👋 프로그램을 종료합니다. 다음에 또 만나요!")
             break
         else:
