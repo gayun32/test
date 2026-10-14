@@ -47,4 +47,9 @@ python prompt_manager.py
 
 ## 스크린샷
 <img width="782" height="261" alt="화면 캡처 2026-07-08 151246" src="https://github.com/user-attachments/assets/459b6576-d8b0-4de8-909c-fe6d6cb63cf6" />
+<img width="1067" height="517" alt="화면 캡처 2026-07-08 151207" src="https://github.com/user-attachments/assets/ad3eb329-2812-4a06-b72a-bf0d3c36a05a" />
+<img width="457" height="456" alt="화면 캡처 2026-07-08 151135" src="https://github.com/user-attachments/assets/6c8e58ef-1811-48de-b511-fdd736c0e098" />
+<img width="561" height="631" alt="화면 캡처 2026-07-08 151048" src="https://github.com/user-attachments/assets/ad926cea-1477-4067-b616-f0e8bc15e8c2" />
+<img width="532" height="386" alt="화면 캡처 2026-07-08 151005" src="https://github.com/user-attachments/assets/71647129-28f1-4206-a71a-b47bc0b481a6" />
+<img width="732" height="437" alt="화면 캡처 2026-07-08 150942" src="https://github.com/user-attachments/assets/c70ae422-ac09-4127-8589-542cd7de1953" />
 
