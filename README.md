@@ -42,3 +42,9 @@ python prompt_manager.py
 
 - 프로그램 실행 중에 추가한 프롬프트와 즐겨찾기 상태는 **실행 중에만 유지**되며, 종료 시 초기화됩니다.
 - 기본 프롬프트 3개가 미리 등록되어 있습니다.
+
+---
+
+## 스크린샷
+<img width="782" height="261" alt="화면 캡처 2026-07-08 151246" src="https://github.com/user-attachments/assets/459b6576-d8b0-4de8-909c-fe6d6cb63cf6" />
+
